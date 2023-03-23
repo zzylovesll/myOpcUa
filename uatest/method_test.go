@@ -7,9 +7,9 @@ import (
 	"context"
 	"testing"
 
-	"github.com/gopcua/opcua"
-	"github.com/gopcua/opcua/ua"
 	"github.com/pascaldekloe/goe/verify"
+	"github.com/zzylovesll/myOpcUa"
+	"github.com/zzylovesll/myOpcUa/ua"
 )
 
 type Complex struct {

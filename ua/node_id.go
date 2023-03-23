@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/gopcua/opcua/errors"
+	"github.com/zzylovesll/myOpcUa/errors"
 )
 
 // todo(fs): fix mask

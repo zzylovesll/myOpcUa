@@ -7,7 +7,7 @@ package ua
 import (
 	"fmt"
 
-	"github.com/gopcua/opcua/debug"
+	"github.com/zzylovesll/myOpcUa/debug"
 )
 
 // svcreg contains all known service request/response objects.

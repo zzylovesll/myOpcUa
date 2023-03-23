@@ -18,13 +18,13 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/gopcua/opcua/debug"
-	"github.com/gopcua/opcua/errors"
-	"github.com/gopcua/opcua/id"
-	"github.com/gopcua/opcua/stats"
-	"github.com/gopcua/opcua/ua"
-	"github.com/gopcua/opcua/uacp"
-	"github.com/gopcua/opcua/uasc"
+	"github.com/zzylovesll/myOpcUa/debug"
+	"github.com/zzylovesll/myOpcUa/errors"
+	"github.com/zzylovesll/myOpcUa/id"
+	"github.com/zzylovesll/myOpcUa/stats"
+	"github.com/zzylovesll/myOpcUa/ua"
+	"github.com/zzylovesll/myOpcUa/uacp"
+	"github.com/zzylovesll/myOpcUa/uasc"
 )
 
 // GetEndpoints returns the available endpoint descriptions for the server.
@@ -154,7 +154,7 @@ type Client struct {
 // To modify configuration you can provide any number of Options as opts. See
 // #Option for details.
 //
-// https://godoc.org/github.com/gopcua/opcua#Option
+// https://godoc.org/github.com/zzylovesll/myOpcUa#Option
 //
 // Note: Starting with v0.5 this function will will return an error.
 func NewClient(endpoint string, opts ...Option) *Client {
@@ -235,7 +235,7 @@ func (c *Client) Connect(ctx context.Context) (err error) {
 
 	// todo(fs): we might need to guard this with an option in case of a broken
 	// todo(fs): server. For the sake of simplicity we left the option out but
-	// todo(fs): see the discussion in https://github.com/gopcua/opcua/pull/512
+	// todo(fs): see the discussion in https://github.com/zzylovesll/myOpcUa/pull/512
 	// todo(fs): and you should find a commit that implements this option.
 	if err := c.UpdateNamespacesWithContext(ctx); err != nil {
 		c.CloseWithContext(ctx)
@@ -348,7 +348,7 @@ func (c *Client) monitor(ctx context.Context) {
 						// todo(fs): why we are trying to create a new secure channel when we shut the client
 						// todo(fs): down.
 						//
-						// https://github.com/gopcua/opcua/pull/470
+						// https://github.com/zzylovesll/myOpcUa/pull/470
 						c.conn.Close()
 						if sc := c.SecureChannel(); sc != nil {
 							sc.Close()
@@ -587,7 +587,7 @@ func (c *Client) CloseWithContext(ctx context.Context) error {
 		c.SecureChannel().Close()
 	}
 
-	// https://github.com/gopcua/opcua/pull/462
+	// https://github.com/zzylovesll/myOpcUa/pull/462
 	//
 	// do not close the c.sechanErr channel since it leads to
 	// race conditions and it gets garbage collected anyway.
@@ -685,7 +685,7 @@ type Session struct {
 // that the server sent in Create Session Response. The default PolicyID
 // "Anonymous" wii be set if it's missing in response.
 //
-// See Part 4, 5.6.2
+// # See Part 4, 5.6.2
 //
 // Note: Starting with v0.5 this method will require a context
 // and the corresponding XXXWithContext(ctx) method will be removed.
@@ -777,7 +777,7 @@ func anonymousPolicyID(endpoints []*ua.EndpointDescription) string {
 // the client already has a session it will be closed. To retain the current
 // session call DetachSession.
 //
-// See Part 4, 5.6.3
+// # See Part 4, 5.6.3
 //
 // Note: Starting with v0.5 this method will require a context
 // and the corresponding XXXWithContext(ctx) method will be removed.
@@ -846,7 +846,7 @@ func (c *Client) ActivateSessionWithContext(ctx context.Context, s *Session) err
 
 		// close the previous session
 		//
-		// https://github.com/gopcua/opcua/issues/474
+		// https://github.com/zzylovesll/myOpcUa/issues/474
 		//
 		// We decided not to check the error of CloseSession() since we
 		// can't do much about it anyway and it creates a race in the
@@ -860,7 +860,7 @@ func (c *Client) ActivateSessionWithContext(ctx context.Context, s *Session) err
 
 // CloseSession closes the current session.
 //
-// See Part 4, 5.6.4
+// # See Part 4, 5.6.4
 //
 // Note: Starting with v0.5 this method will require a context
 // and the corresponding XXXWithContext(ctx) method will be removed.
@@ -1153,7 +1153,7 @@ func (c *Client) BrowseNextWithContext(ctx context.Context, req *ua.BrowseNextRe
 
 // RegisterNodes registers node ids for more efficient reads.
 //
-// Part 4, Section 5.8.5
+// # Part 4, Section 5.8.5
 //
 // Note: Starting with v0.5 this method will require a context
 // and the corresponding XXXWithContext(ctx) method will be removed.
@@ -1175,7 +1175,7 @@ func (c *Client) RegisterNodesWithContext(ctx context.Context, req *ua.RegisterN
 
 // UnregisterNodes unregisters node ids previously registered with RegisterNodes.
 //
-// Part 4, Section 5.8.6
+// # Part 4, Section 5.8.6
 //
 // Note: Starting with v0.5 this method will require a context
 // and the corresponding XXXWithContext(ctx) method will be removed.

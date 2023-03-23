@@ -11,10 +11,10 @@ import (
 	"log"
 	"time"
 
-	"github.com/gopcua/opcua"
-	"github.com/gopcua/opcua/debug"
-	"github.com/gopcua/opcua/id"
-	"github.com/gopcua/opcua/ua"
+	"github.com/zzylovesll/myOpcUa"
+	"github.com/zzylovesll/myOpcUa/debug"
+	"github.com/zzylovesll/myOpcUa/id"
+	"github.com/zzylovesll/myOpcUa/ua"
 )
 
 func main() {
