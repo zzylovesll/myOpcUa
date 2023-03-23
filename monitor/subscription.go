@@ -2,6 +2,7 @@ package monitor
 
 import (
 	"context"
+	"fmt"
 	"sync"
 	"sync/atomic"
 
@@ -341,9 +342,12 @@ func (s *Subscription) AddMonitorItemsWithContext(ctx context.Context, nodes ...
 		return nil, errors.Errorf("monitor items response length mismatch")
 	}
 	var monitoredItems []Item
+	ids := make([]*ua.NodeID, 0)
 	for i, res := range resp.Results {
 		if res.StatusCode != ua.StatusOK {
 			print(res.StatusCode)
+			nodeID := toAdd[i].ItemToMonitor.NodeID
+			ids = append(ids, nodeID)
 			continue
 			//return nil, res.StatusCode
 		}
@@ -355,8 +359,12 @@ func (s *Subscription) AddMonitorItemsWithContext(ctx context.Context, nodes ...
 		s.itemLookup[res.MonitoredItemID] = mn
 		monitoredItems = append(monitoredItems, mn)
 	}
+	if len(ids) > 0 {
+		return monitoredItems, fmt.Errorf("节点错误%v", ids)
+	} else {
+		return monitoredItems, nil
 
-	return monitoredItems, nil
+	}
 }
 
 // RemoveNodes removes nodes defined by their string representation
