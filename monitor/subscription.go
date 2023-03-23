@@ -343,7 +343,9 @@ func (s *Subscription) AddMonitorItemsWithContext(ctx context.Context, nodes ...
 	var monitoredItems []Item
 	for i, res := range resp.Results {
 		if res.StatusCode != ua.StatusOK {
-			return nil, res.StatusCode
+			print(res.StatusCode)
+			continue
+			//return nil, res.StatusCode
 		}
 		mn := Item{
 			id:     res.MonitoredItemID,
