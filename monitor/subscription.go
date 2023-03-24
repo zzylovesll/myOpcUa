@@ -361,7 +361,8 @@ func (s *Subscription) AddMonitorItemsWithContext(ctx context.Context, nodes ...
 		monitoredItems = append(monitoredItems, mn)
 	}
 	if len(ids) > 0 {
-		fmt.Printf("节点错误%v", ids)
+		fmt.Printf("节点错误%v \n", ids)
+		fmt.Println()
 		//return monitoredItems, fmt.Errorf("节点错误%v", ids)
 		return monitoredItems, nil
 	} else {
