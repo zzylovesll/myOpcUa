@@ -124,13 +124,13 @@ func (m *NodeMonitor) SetErrorHandler(cb ErrHandler) {
 // will also cause the subscription to stop, but `Unsubscribe` must still be called.
 func (m *NodeMonitor) Subscribe(ctx context.Context, params *opcua.SubscriptionParameters, cb MsgHandler, nodes ...string) (*Subscription, error) {
 	sub, err := newSubscription(ctx, m, params, DefaultCallbackBufferLen, nodes...)
-	if err != nil {
-		return nil, err
-	}
+	//if err != nil {
+	//	return nil, err
+	//}
 
 	go sub.pump(ctx, nil, cb)
 
-	return sub, nil
+	return sub, err
 }
 
 // ChanSubscribe creates a new channel-based subscription and an optional list of nodes.
