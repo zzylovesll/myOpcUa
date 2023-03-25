@@ -108,10 +108,11 @@ func newSubscription(ctx context.Context, m *NodeMonitor, params *opcua.Subscrip
 	}
 
 	if err = s.AddNodesWithContext(ctx, nodes...); err != nil {
-		return nil, err
+		//return nil, err
+		fmt.Println(err.Error())
 	}
 
-	return s, nil
+	return s, err
 }
 
 // SetErrorHandler sets an optional callback for async errors
@@ -361,10 +362,10 @@ func (s *Subscription) AddMonitorItemsWithContext(ctx context.Context, nodes ...
 		monitoredItems = append(monitoredItems, mn)
 	}
 	if len(ids) > 0 {
-		fmt.Printf("节点错误%v \n", ids)
-		fmt.Println()
-		//return monitoredItems, fmt.Errorf("节点错误%v", ids)
-		return monitoredItems, nil
+		//fmt.Printf("节点错误%v \n", ids)
+		//fmt.Println()
+		return monitoredItems, fmt.Errorf("节点错误%v", ids)
+		//return monitoredItems, nil
 	} else {
 		return monitoredItems, nil
 
